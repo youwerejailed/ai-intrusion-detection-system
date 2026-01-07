@@ -1,31 +1,37 @@
-# AI-Powered Intrusion Detection (Supervised) — NSL-KDD
+# AI Intrusion Detection System (Supervised) — NSL-KDD
 
-Supervised machine learning pipeline for detecting **Normal vs Attack** network traffic using the **NSL-KDD** dataset.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-orange)
+![Task](https://img.shields.io/badge/Task-Intrusion%20Detection-red)
+![Dataset](https://img.shields.io/badge/Dataset-NSL--KDD-lightgrey)
 
-## What this project does
-- Loads NSL-KDD (KDDTrain+/KDDTest+)
-- Converts multi-class attack labels into binary:
-  - `normal` → 0
-  - everything else → 1 (attack)
-- Preprocessing:
-  - One-hot encoding for categorical features (`protocol_type`, `service`, `flag`)
-  - Standard scaling for numeric features
-- Models:
-  - Logistic Regression (baseline)
-  - Random Forest (stronger)
-- Evaluation:
-  - ROC-AUC, PR-AUC
-  - Confusion matrix, classification report
-  - ROC/PR curves saved under `reports/figures/`
+Supervised ML pipeline that detects **Normal vs Attack** traffic using the **NSL-KDD** dataset.
+Includes preprocessing, model training, evaluation (ROC/PR), threshold tuning, and model export.
 
-## Quickstart
+---
 
-### 1) Create & activate venv
-**Git Bash (Windows):**
-```bash
-python -m venv .venv
-source .venv/Scripts/activate
-pip install -r requirements.txt
+## ✅ Key Results (NSL-KDD Test Set)
 
+| Model | Threshold | ROC-AUC | PR-AUC | Attack Precision | Attack Recall | FP | FN |
+|------|-----------:|--------:|-------:|-----------------:|--------------:|---:|---:|
+| Random Forest | 0.25 | 0.9620 | 0.9656 | 0.9663 | 0.7385 | 331 | 3356 |
+| Random Forest | 0.35 | 0.9620 | 0.9656 | 0.9684 | 0.6925 | 290 | 3946 |
+| Logistic Regression (baseline) | 0.50 | 0.7907 | 0.8653 | 0.9169 | 0.6258 | 728 | 4802 |
 
+**Interpretation:** Threshold controls the security tradeoff: higher **attack recall** vs lower **false positives**.
 
+---
+
+## 🧱 Architecture
+
+```mermaid
+flowchart LR
+  A[NSL-KDD Raw Data<br/>KDDTrain+, KDDTest+] --> B[Preprocessing]
+  B --> C1[Categorical: OneHot<br/>protocol_type, service, flag]
+  B --> C2[Numeric: StandardScaler]
+  C1 --> D[Model]
+  C2 --> D[Model]
+  D --> E[Probabilities]
+  E --> F[Threshold Decision<br/>Attack if p >= threshold]
+  F --> G[Metrics: ROC-AUC, PR-AUC<br/>Confusion Matrix, Report]
+  D --> H[Export Pipeline<br/>joblib]
