@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# venv
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (büyük dosyalar / lisans)
+data/raw/
+data/processed/
+
+# Models & artifacts (istersen sadece küçükleri tut)
+models/
+reports/figures/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
