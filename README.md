@@ -28,4 +28,4 @@ source .venv/Scripts/activate
 pip install -r requirements.txt
 
 
-<img width="748" height="560" alt="image" src="https://github.com/user-attachments/assets/cc155769-66ae-44c5-8aec-0759053e1475" />
+
