@@ -17,7 +17,7 @@ data/processed/
 
 # Models & artifacts (istersen sadece küçükleri tut)
 models/
-reports/figures/
+
 
 # Jupyter
 .ipynb_checkpoints/
