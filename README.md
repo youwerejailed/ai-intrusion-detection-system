@@ -26,3 +26,9 @@ Supervised machine learning pipeline for detecting **Normal vs Attack** network 
 python -m venv .venv
 source .venv/Scripts/activate
 pip install -r requirements.txt
+
+## Evaluation Visuals
+
+### RandomForest (threshold=0.25)
+![ROC](reports/figures/roc_curve_rf.png)
+![PR](reports/figures/pr_curve_rf.png)
